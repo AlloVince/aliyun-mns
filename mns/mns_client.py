@@ -36,7 +36,7 @@ class MNSClient:
         self.logger = logger
         self.http = MNSHttp(self.host, logger=logger, is_https=self.is_https)
         if self.logger:
-            self.logger.info("InitClient Host:%s Version:%s" % (host, version))
+            self.logger.info("InitMnsClient Host:%s Version:%s" % (host, version))
 
     def set_log_level(self, log_level):
         if self.logger:
@@ -238,7 +238,7 @@ class MNSClient:
         if resp.error_data == "":
             resp.message_id, resp.message_body_md5 = SendMessageDecoder.decode(resp_inter.data, req_inter.get_req_id())
             if self.logger:
-                self.logger.info("SendMessage RequestId:%s QueueName:%s Priority:%s DelaySeconds:%s MessageId:%s MessageBodyMD5:%s" % \
+                self.logger.debug("SendMessage RequestId:%s QueueName:%s Priority:%s DelaySeconds:%s MessageId:%s MessageBodyMD5:%s" % \
                     (resp.get_requestid(), req.queue_name, req.priority, \
                     req.delay_seconds, resp.message_id, resp.message_body_md5))
 
@@ -261,7 +261,7 @@ class MNSClient:
         if resp.error_data == "":
             resp.message_list = BatchSendMessageDecoder.decode(resp_inter.data, req_inter.get_req_id())
             if self.logger:
-                self.logger.info("BatchSendMessage RequestId:%s QueueName:%s MessageCount:%s MessageInfo\n%s" % \
+                self.logger.debug("BatchSendMessage RequestId:%s QueueName:%s MessageCount:%s MessageInfo\n%s" % \
                     (resp.get_requestid(), req.queue_name, len(req.message_list), \
                     "\n".join(["MessageId:%s MessageBodyMD5:%s" % (msg.message_id, msg.message_body_md5) for msg in resp.message_list])))
 
