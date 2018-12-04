@@ -146,8 +146,8 @@ class RequestInternal:
         return self.header.get("x-mns-user-request-id")
 
     def __str__(self):
-        return "Method: %s\nUri: %s\nHeader: %s\nData: %s\n" % \
-                (self.method, self.uri, "\n".join(["%s: %s" % (k,v) for k,v in self.header.items()]), self.data)
+        return "Method: %s | Uri: %s | Header: %s | Data: %s | " % \
+                (self.method, self.uri, " | ".join(["%s: %s" % (k,v) for k,v in self.header.items()]), self.data)
 
 class ResponseInternal:
     def __init__(self, status = 0, header = None, data = ""):
@@ -158,5 +158,5 @@ class ResponseInternal:
         self.data = data
 
     def __str__(self):
-        return "Status: %s\nHeader: %s\nData: %s\n" % \
-            (self.status, "\n".join(["%s: %s" % (k,v) for k,v in self.header.items()]), self.data)
+        return "Status: %s | Header: %s | Data: %s | " % \
+            (self.status, " | ".join(["%s: %s" % (k,v) for k,v in self.header.items()]), self.data)
