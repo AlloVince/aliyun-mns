@@ -482,7 +482,7 @@ class QueueMeta:
                      "LastModifyTime" : time.strftime("%Y/%m/%d %H:%M:%S", time.localtime(self.last_modify_time)),
                      "QueueName" : self.queue_name,
                      "LoggingEnabled" : self.logging_enabled}
-        return "\n".join(["%s: %s"%(k.ljust(30),v) for k,v in meta_info.items()])
+        return " | ".join(["%s: %s"%(k.ljust(30),v) for k,v in meta_info.items()])
 
 class Message:
     def __init__(self, message_body = None, delay_seconds = None, priority = None):
